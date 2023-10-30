@@ -39,11 +39,12 @@ function App() {
     <>
       <h1>City Guys</h1>
       <form onSubmit={getLocation}>
-        <input onChange={handleChange} placeholder="Type a location" />
-        <button>Get Location</button>
+        <input onChange={handleChange} placeholder="Pick a place, any place" />
+        <button>Explore!</button>
       </form>
-
       <h2>{location.display_name}</h2>
+      <h3>Latitude: {location.lat}</h3>
+      <h3>Longitude: {location.lon}</h3>
     </>
   );
 }
