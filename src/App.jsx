@@ -1,6 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 // I've struggled with React so far so I'm gonna comment EVERYTHING I'm not 100% sure on so I know what it does
 
@@ -34,17 +35,24 @@ function App() {
     setLocation(result.data[0]);
   }
 
+  // map is the image
+  const map = `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${location.lat},${location.lon}&zoom=18&markers=${location.lat},${location.lon}|icon:tiny-black-cutout`;
+
   // All of the below makes sense
   return (
     <>
       <h1>City Guys</h1>
       <form onSubmit={getLocation}>
-        <input onChange={handleChange} placeholder="Pick a place, any place" />
+        <input onChange={handleChange} placeholder="Gimme a location" />
         <button>Explore!</button>
       </form>
-      <h2>{location.display_name}</h2>
-      <h3>Latitude: {location.lat}</h3>
-      <h3>Longitude: {location.lon}</h3>
+
+      <div className="output">
+        <h2>Location: {location.display_name}</h2>
+        <h3>Latitude: {location.lat}</h3>
+        <h3>Longitude: {location.lon}</h3>
+        <img src={map} />
+      </div>
     </>
   );
 }
