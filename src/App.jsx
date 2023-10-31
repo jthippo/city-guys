@@ -1,7 +1,6 @@
 import "./App.css";
 import axios from "axios";
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 // I've struggled with React so far so I'm gonna comment EVERYTHING I'm not 100% sure on so I know what it does
 
