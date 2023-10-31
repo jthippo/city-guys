@@ -20,7 +20,7 @@ function App() {
   const [location, setLocation] = useState({});
 
   // Function to get location when form is submitted; it's asynchrounous
-  // preventDefault stops the form's submitted info being added to the URL
+  // preventDefault stops the page refreshing when the form is submitted
   async function getLocation(event) {
     event.preventDefault();
 
@@ -34,24 +34,30 @@ function App() {
     setLocation(result.data[0]);
   }
 
-  // map is the image
-  const map = `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${location.lat},${location.lon}&zoom=18&markers=${location.lat},${location.lon}|icon:tiny-black-cutout`;
-
   // All of the below makes sense
+  // Conditional render - if location.lat is truthy, render everything else
   return (
     <>
-      <h1>City Guys</h1>
-      <form onSubmit={getLocation}>
-        <input onChange={handleChange} placeholder="Gimme a location" />
-        <button>Explore!</button>
-      </form>
-
-      <div className="output">
-        <h2>Location: {location.display_name}</h2>
-        <h3>Latitude: {location.lat}</h3>
-        <h3>Longitude: {location.lon}</h3>
-        <img src={map} />
+      <div className="titleBox">
+        <h1>
+          &#x1F3D9; <i>City Guys</i> &#x1F3D9;{" "}
+        </h1>
+        <form onSubmit={getLocation}>
+          <input onChange={handleChange} placeholder="Gimme a location" />
+          <button>Explore!</button>
+        </form>
       </div>
+      {location.lat && (
+        <div className="results">
+          <h2>{location.display_name}</h2>
+          <h3>
+            {location.lat}, {location.lon}
+          </h3>
+          <img
+            src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${location.lat},${location.lon}&zoom=13&markers=${location.lat},${location.lon}|icon:tiny-black-cutout`}
+          />
+        </div>
+      )}
     </>
   );
 }
